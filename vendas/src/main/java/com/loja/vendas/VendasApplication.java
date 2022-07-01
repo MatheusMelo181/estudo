@@ -21,6 +21,27 @@ public class VendasApplication {
 
 			List<Cliente> todosClientes = clienteDAO.obterTodos();
 			todosClientes.forEach(System.out::println);
+
+			todosClientes.forEach(cliente -> {
+				cliente.setNome(cliente.getNome() + " atualizado.");
+				clienteDAO.atualizar(cliente);
+			});
+
+			todosClientes = clienteDAO.obterTodos();
+			todosClientes.forEach(System.out::println);
+
+			clienteDAO.buscarPorNome("Mat").forEach(System.out::println);
+
+			clienteDAO.obterTodos().forEach(cliente -> {
+				clienteDAO.deletar(cliente);
+			});
+
+			todosClientes = clienteDAO.obterTodos();
+			if (todosClientes.isEmpty()){
+				System.out.println("Nenhum cliente encontrado.");
+			}else {
+				todosClientes.forEach(System.out::println);
+			}
 		};
 	}
 
